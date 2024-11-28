@@ -11,7 +11,7 @@ while True:
     input("Input your date of birth(mm/dd/yyyy): ")
     
 
-    add_input = input("Do you wish to continue(Yes?No): ")
+    add_input = input("Do you wish to add another user information?(Yes?No): ")
     if add_input == "Yes" or add_input == "yes":
       pass
     elif add_input == "No" or add_input == "no":
