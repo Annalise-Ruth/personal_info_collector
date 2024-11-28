@@ -2,18 +2,40 @@
 #Prompt user to enter their Full name, address, contact number, email address and date of birth
 #Store the input calues in a dictionary
 
+user_information = {}
+collector = []
+user_input = True
+add_input = True
 
-while True:
-    input("Input your name: ")
-    input("Input your address: ")
-    input("Input your cellphone number(+63): ")
-    input("Input your email address: ")
-    input("Input your date of birth(mm/dd/yyyy): ")
+
+while user_input:
+    name = input("Input your fullname: ")
+    address = input("Input your address: ")
+    number = input("Input your cellphone number(+63): ")
+    email = input("Input your email address: ")
+    birthday = input("Input your date of birth(mm/dd/yyyy): ")
+
+    user_information = {
+        "Full name": name,
+        "Address": address,
+        "Cellphone number": number,
+        "Email address": email,
+        "Birth date": birthday 
+    }
+
+    collector.append(user_information)
     
+    while add_input:
+        try:
+            choice = input("Do you wish to add another user information?(Yes?No): ")
+            if choice == "yes":
+                break
+            elif choice == "no":
+                user_input = False
+                break
+            else:
+                raise Exception("Invalid Input")
+        except Exception:
+            print(Exception)
 
-    add_input = input("Do you wish to add another user information?(Yes?No): ")
-    if add_input == "Yes" or add_input == "yes":
-      pass
-    elif add_input == "No" or add_input == "no":
-       break
-
+print(collector)
