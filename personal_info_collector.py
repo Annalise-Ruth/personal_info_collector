@@ -1,7 +1,4 @@
 
-
-
-
 import datetime
 
 #Prompt user to enter their Full name, address, contact number, email address and date of birth
@@ -95,7 +92,7 @@ def validateInput(user):
 
 def main():
     user_information = {}
-    f = open("./output.txt", "w")
+    file = open("./output.txt", "w")
     collector = []
     add_input = True
 
@@ -106,7 +103,7 @@ def main():
         number = validateInput("mobile_number")
         email = validateInput("email")
         birthday = validateInput("birth_date")
-        
+
 #Store the input calues in a dictionary
         user_information = {
             "Full name": name,
@@ -140,9 +137,9 @@ def main():
         print(dictionary)
         for keys, value in dictionary.items():
             if not skip:
-                f.writelines(keys + ': ' + value)
+                file.writelines(keys + ': ' + value)
             else:
-                f.writelines('\n' + keys + ': ' + value)
+                file.writelines('\n' + keys + ': ' + value)
             skip = True
 
     for index in range(len(collector)):
