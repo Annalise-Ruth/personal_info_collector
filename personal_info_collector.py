@@ -14,11 +14,17 @@ def validateInput(user):
         try:
             match user:
                 case "name":
-                    output = input("Input your Full name: ").upper()
+                    output = input("Input your Full Name: ").upper()
                     for name in output:    
                         if not name.isalpha() and not name.isspace() and name not in specialCharacters:
                             raise ValueError("Wrong. Try again.")
                     break
+                case "mobile_number":
+                    output = input("Input your Mobile Number(+63): ")
+
+                    if len(output) != 9 or not output.isnumeric():
+                        raise ValueError("Wrong. Try again.")
+                    
         except Exception as exception_:
             print(exception_)
 def main():
@@ -26,7 +32,7 @@ def main():
     while user_input:
         name = validateInput("name")
         address = input("Input your address: ")
-        number = input("Input your cellphone number(+63): ")
+        number = validateInput("mobile_number")
         email = input("Input your email address: ")
         birthday = input("Input your date of birth(mm/dd/yyyy): ")
 
