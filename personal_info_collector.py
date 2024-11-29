@@ -2,9 +2,8 @@
 #Prompt user to enter their Full name, address, contact number, email address and date of birth
 #Store the input calues in a dictionary
 
-user_information = {}
-collector = []
-add_input = True
+import datetime
+
 
 def validateInput(user):
     specialCharacters = ["-", ",", ".", "*", "'", "#"]
@@ -19,9 +18,9 @@ def validateInput(user):
                         if not name.isalpha() and not name.isspace() and name not in specialCharacters:
                             raise ValueError("Wrong. Try again.")
                     break
-                
+
                 case "address":
-                    output = input('Address: ')
+                    output = input("Input your Address: ")
                     address = output.split()
                     requireAlpha = False
                     requireNumeric = False
@@ -30,15 +29,14 @@ def validateInput(user):
                         if not word.isnumeric() and not word.isalpha() and not word in specialCharacters:
                             for letter in word:
                                 if not letter.isalpha() and not letter in specialCharacters:
-                                    raise ValueError("Invalid Address.")
-                        print(word)
+                                    raise ValueError("Wrong. Try again.")
                         if word.isalpha():
                             requireAlpha = True
                         elif word.isnumeric():
                             requireNumeric = True
 
                     if not requireNumeric or not requireAlpha:
-                        raise ValueError("Invalid Address.")
+                        raise ValueError("Wrong. Try again.")
                           
                     break
 
@@ -48,23 +46,60 @@ def validateInput(user):
                     if len(output) != 9 or not output.isnumeric():
                         raise ValueError("Wrong. Try again.")
                     break
+
                 case "email":
-                    pass
+                    output = input("Input your Email: ")
+                    if ' ' in output or not '@' in output:
+                        raise ValueError("Wrong. Try again.")
+                    
+                    tempList = output.split('@', 1)
+                     
+                    username = tempList[0] 
+                    temp = tempList[1]
+
+                    if '@' in temp:
+                        raise ValueError("Wrong. Try again.") 
+                        
+                    tempList = temp.split('.', 1)
+
+                    try:
+                        mailServer = tempList[0]
+                        domain = tempList[1]
+                    except Exception:
+                        raise ValueError("Wrong. Try again.")
+
+                    for letter in mailServer:
+                        if not letter.isalpha() and letter != '-':
+                            raise ValueError("Wrong. Try again.")
+                         
+                    if not domain.isalpha():
+                        raise ValueError("Wrong. Try again.") 
+                    
+                    break
+
                 case "birth_date":
+                    pass
+
+                case _:
                     pass
 
         except Exception as exception_:
             print(exception_)
 
     return output
+
 def main():
+    user_information = {}
+    collector = []
+    add_input = True
+
     user_input = True
     while user_input:
         name = validateInput("name")
-        address = input("Input your address: ")
+        address = validateInput("address")
         number = validateInput("mobile_number")
-        email = input("Input your email address: ")
-        birthday = input("Input your date of birth(mm/dd/yyyy): ")
+        email = validateInput("email")
+        birthday = validateInput("birth_date")
 
         user_information = {
             "Full name": name,
@@ -89,9 +124,7 @@ def main():
             except Exception:
                 print(Exception)
 
-for index in range(len(collector)):
-    print(collector)
+    for index in range(len(collector)):
+        print(collector)
 
 main()
-#with open("./Infomation.txt", "a") as file_handle:
-    #file_handle.write(collector)
