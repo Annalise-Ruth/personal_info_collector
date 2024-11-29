@@ -78,7 +78,12 @@ def validateInput(user):
                     break
 
                 case "birth_date":
-                    pass
+                    output = input("Input your date of birth(mm/dd/yyyy): ")
+                    try:
+                        dateInput = datetime.datetime.strptime(output, "%m/%d/%Y")
+                    except Exception:
+                        raise ValueError("Wrong. Try again.")
+                    break
 
                 case _:
                     pass
