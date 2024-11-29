@@ -6,36 +6,36 @@ import datetime
 
 
 def validateInput(user):
-    specialCharacters = ["-", ",", ".", "*", "'", "#"]
+    special_characters = ["-", ",", ".", "*", "'", "#"]
     output = ''
-    #print(user)
+    
     while True:
         try:
             match user:
                 case "name":
                     output = input("Input your Full Name: ").upper()
                     for name in output:    
-                        if not name.isalpha() and not name.isspace() and name not in specialCharacters:
+                        if not name.isalpha() and not name.isspace() and name not in special_characters:
                             raise ValueError("Wrong. Try again.")
                     break
 
                 case "address":
                     output = input("Input your Address: ")
                     address = output.split()
-                    requireAlpha = False
-                    requireNumeric = False
+                    require_alpha = False
+                    require_numeric = False
 
                     for word in address:   
-                        if not word.isnumeric() and not word.isalpha() and not word in specialCharacters:
+                        if not word.isnumeric() and not word.isalpha() and not word in special_characters:
                             for letter in word:
-                                if not letter.isalpha() and not letter in specialCharacters:
+                                if not letter.isalpha() and not letter in special_characters:
                                     raise ValueError("Wrong. Try again.")
                         if word.isalpha():
-                            requireAlpha = True
+                            require_alpha = True
                         elif word.isnumeric():
-                            requireNumeric = True
+                            require_numeric = True
 
-                    if not requireNumeric or not requireAlpha:
+                    if not require_numeric or not require_alpha:
                         raise ValueError("Wrong. Try again.")
                           
                     break
@@ -52,23 +52,23 @@ def validateInput(user):
                     if ' ' in output or not '@' in output:
                         raise ValueError("Wrong. Try again.")
                     
-                    tempList = output.split('@', 1)
+                    temp_list = output.split('@', 1)
                      
-                    username = tempList[0] 
-                    temp = tempList[1]
+                    username = temp_list[0] 
+                    temp = temp_list[1]
 
                     if '@' in temp:
                         raise ValueError("Wrong. Try again.") 
                         
-                    tempList = temp.split('.', 1)
+                    temp_list = temp.split('.', 1)
 
                     try:
-                        mailServer = tempList[0]
-                        domain = tempList[1]
+                        mail_server = temp_list[0]
+                        domain = temp_list[1]
                     except Exception:
                         raise ValueError("Wrong. Try again.")
 
-                    for letter in mailServer:
+                    for letter in mail_server:
                         if not letter.isalpha() and letter != '-':
                             raise ValueError("Wrong. Try again.")
                          
@@ -80,7 +80,7 @@ def validateInput(user):
                 case "birth_date":
                     output = input("Input your date of birth(mm/dd/yyyy): ")
                     try:
-                        dateInput = datetime.datetime.strptime(output, "%m/%d/%Y")
+                        date_input = datetime.datetime.strptime(output, "%m/%d/%Y")
                     except Exception:
                         raise ValueError("Wrong. Try again.")
                     break
