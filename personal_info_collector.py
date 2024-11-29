@@ -1,10 +1,10 @@
-#Make a loop to continue asking the user until the user chooses to exit
-#Prompt user to enter their Full name, address, contact number, email address and date of birth
-#Store the input calues in a dictionary
+
+
+
 
 import datetime
 
-
+#Prompt user to enter their Full name, address, contact number, email address and date of birth
 def validateInput(user):
     special_characters = ["-", ",", ".", "*", "'", "#"]
     output = ''
@@ -95,6 +95,7 @@ def validateInput(user):
 
 def main():
     user_information = {}
+    f = open("./output.txt", "w")
     collector = []
     add_input = True
 
@@ -105,17 +106,19 @@ def main():
         number = validateInput("mobile_number")
         email = validateInput("email")
         birthday = validateInput("birth_date")
-
+        
+#Store the input calues in a dictionary
         user_information = {
             "Full name": name,
             "Address": address,
-            "Cellphone number": number,
-            "Email address": email,
-            "Birth date": birthday 
+            "Cellphone Number": number,
+            "Email Address": email,
+            "Birth Date": birthday 
         }
 
         collector.append(user_information)
-        
+
+#Make a loop to continue asking the user until the user chooses to exit    
         while add_input:
             try:
                 choice = input("Do you wish to add another user information?(Yes?No): ").lower()
@@ -128,6 +131,19 @@ def main():
                     raise Exception("Invalid Input")
             except Exception:
                 print(Exception)
+
+    print(collector)
+    skip = False
+    for i in range(len(collector)):
+        dictionary = collector[i]
+
+        print(dictionary)
+        for keys, value in dictionary.items():
+            if not skip:
+                f.writelines(keys + ': ' + value)
+            else:
+                f.writelines('\n' + keys + ': ' + value)
+            skip = True
 
     for index in range(len(collector)):
         print(collector)
