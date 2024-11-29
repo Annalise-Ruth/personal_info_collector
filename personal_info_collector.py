@@ -19,14 +19,44 @@ def validateInput(user):
                         if not name.isalpha() and not name.isspace() and name not in specialCharacters:
                             raise ValueError("Wrong. Try again.")
                     break
+                
+                case "address":
+                    output = input('Address: ')
+                    address = output.split()
+                    requireAlpha = False
+                    requireNumeric = False
+
+                    for word in address:   
+                        if not word.isnumeric() and not word.isalpha() and not word in specialCharacters:
+                            for letter in word:
+                                if not letter.isalpha() and not letter in specialCharacters:
+                                    raise ValueError("Invalid Address.")
+                        print(word)
+                        if word.isalpha():
+                            requireAlpha = True
+                        elif word.isnumeric():
+                            requireNumeric = True
+
+                    if not requireNumeric or not requireAlpha:
+                        raise ValueError("Invalid Address.")
+                          
+                    break
+
                 case "mobile_number":
                     output = input("Input your Mobile Number(+63): ")
 
                     if len(output) != 9 or not output.isnumeric():
                         raise ValueError("Wrong. Try again.")
-                    
+                    break
+                case "email":
+                    pass
+                case "birth_date":
+                    pass
+
         except Exception as exception_:
             print(exception_)
+
+    return output
 def main():
     user_input = True
     while user_input:
